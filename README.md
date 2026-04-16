@@ -7,6 +7,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js >=18](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 
+## Screenshots
+
+| Programmer Jokes | Syntax Highlighting |
+|:---:|:---:|
+| ![Jokes demo](docs/screenshot-jokes.png) | ![Syntax highlighting demo](docs/screenshot-syntax.png) |
+
 ## Features
 
 - **Zero config** — point it at any `.md` file and it opens in your default browser
