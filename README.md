@@ -9,14 +9,11 @@
 
 ## Screenshots
 
-| Programmer Jokes | Syntax Highlighting |
-|:---:|:---:|
-| ![Jokes demo](docs/screenshot-jokes.png) | ![Syntax highlighting demo](docs/screenshot-syntax.png) |
+![Programmer jokes rendered by pretty-md](docs/screenshot-jokes.png)
 
 ## Features
 
 - **Zero config** — point it at any `.md` file and it opens in your default browser
-- **Syntax highlighting** — 190+ languages via [highlight.js](https://highlightjs.org/) (One Dark theme)
 - **GitHub-flavored Markdown** — tables, strikethrough, task lists, and more via [markdown-it](https://github.com/markdown-it/markdown-it)
 - **stdin support** — pipe output from any command directly
 - **Programmatic API** — use it as a library in your own tools
@@ -75,7 +72,7 @@ console.log(html); // complete HTML document string
 
 ### `render(markdown: string): string`
 
-Converts a Markdown string to an HTML fragment using markdown-it with syntax highlighting.
+Converts a Markdown string to an HTML fragment using markdown-it.
 
 ### `buildHtml(body: string, opts?: { title?: string }): string`
 
