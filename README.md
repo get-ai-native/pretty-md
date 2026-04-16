@@ -18,13 +18,13 @@
 ## Installation
 
 ```bash
-npm install -g pretty-md
+npm install -g @get-ai-native/pretty-md
 ```
 
 Or use it once without installing:
 
 ```bash
-npx pretty-md README.md
+npx @get-ai-native/pretty-md README.md
 ```
 
 ## Usage
