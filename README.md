@@ -1,6 +1,6 @@
 # pretty-md
 
-> Instantly render any Markdown file beautifully in your browser — from the terminal.
+> Instantly render any Markdown file beautifully in your browser from the terminal.
 
 [![CI](https://github.com/get-ai-native/pretty-md/actions/workflows/ci.yml/badge.svg)](https://github.com/get-ai-native/pretty-md/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@get-ai-native/pretty-md.svg)](https://www.npmjs.com/package/@get-ai-native/pretty-md)
@@ -13,10 +13,10 @@
 
 ## Features
 
-- **Zero config** — point it at any `.md` file and it opens in your default browser
-- **GitHub-flavored Markdown** — tables, strikethrough, task lists, and more via [markdown-it](https://github.com/markdown-it/markdown-it)
-- **stdin support** — pipe output from any command directly
-- **Programmatic API** — use it as a library in your own tools
+- **Zero config**: point it at any `.md` file and it opens in your default browser
+- **GitHub-flavored Markdown**: tables, strikethrough, task lists, and more via [markdown-it](https://github.com/markdown-it/markdown-it)
+- **stdin support**: pipe output from any command directly
+- **Programmatic API**: use it as a library in your own tools
 
 ## Installation
 
