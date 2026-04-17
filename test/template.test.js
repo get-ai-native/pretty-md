@@ -49,4 +49,37 @@ describe('buildHtml()', () => {
     const html = buildHtml('');
     expect(html).toContain('.hljs-keyword');
   });
+
+  it('inlines the plex-hljs stylesheet (no external link)', () => {
+    const html = buildHtml('');
+    expect(html).toMatch(/<style>[\s\S]*plex-hljs\.css[\s\S]*<\/style>/);
+    expect(html).not.toMatch(/<link[^>]+plex-hljs\.css/);
+  });
+
+  it('includes IBM Plex font stack from plex-hljs.css', () => {
+    const html = buildHtml('');
+    expect(html).toContain("'IBM Plex Serif'");
+    expect(html).toContain("'IBM Plex Sans'");
+    expect(html).toContain("'IBM Plex Mono'");
+    expect(html).toContain('fonts.googleapis.com/css2?family=IBM+Plex');
+  });
+
+  it('exposes the plex-hljs CSS custom properties on :root', () => {
+    const html = buildHtml('');
+    expect(html).toMatch(/:root\s*\{[\s\S]*--accent:/);
+    expect(html).toMatch(/--code-bg:\s*#1e1e2e/);
+  });
+
+  it('uses the new plex-hljs syntax palette for code blocks', () => {
+    const html = buildHtml('');
+    expect(html).toMatch(/\.hljs-keyword[\s\S]*#cba6f7/);
+    expect(html).toMatch(/\.hljs-string[\s\S]*#a6e3a1/);
+  });
+
+  it('no longer ships the old One Dark hljs palette', () => {
+    const html = buildHtml('');
+    expect(html).not.toContain('#c678dd');
+    expect(html).not.toContain('#abb2bf');
+    expect(html).not.toContain('#282c34');
+  });
 });
