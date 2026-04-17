@@ -10,6 +10,7 @@ export default [
         process: 'readonly',
         Buffer: 'readonly',
         console: 'readonly',
+        URL: 'readonly',
       },
     },
     rules: {

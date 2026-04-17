@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- New opinionated default stylesheet (`src/plex-hljs.css`): IBM Plex Serif/Sans/Mono typography, warm paper background, purple accents, and a Catppuccin-based highlight.js palette replacing the previous One Dark theme.
+
 ## [0.1.0] - 2026-04-16
 
 ### Added
