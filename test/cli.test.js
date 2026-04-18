@@ -1,10 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { execSync, spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-
-const CLI = 'node src/cli.js';
 
 function run(args, { stdin } = {}) {
   return spawnSync(process.execPath, ['src/cli.js', ...args], {
