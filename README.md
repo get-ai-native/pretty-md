@@ -23,13 +23,13 @@ One command. No config.
 
 ## Why
 
-You have a Markdown file. You want to read it — not parse it in a terminal, not commit it to GitHub just to preview it, not open VS Code and squint at a side panel that rewraps every five characters.
+You have a Markdown file. You want to read it without parsing it in a terminal, committing it to GitHub just to preview it, or opening VS Code to squint at a side panel that rewraps every five characters.
 
 ```bash
 npx @get-ai-native/pretty-md README.md
 ```
 
-That's it. It opens in your browser, typeset properly. Serif body. Syntax-highlighted code. Clean tables. No dark-mode-bro aesthetic, no Notion-clone sidebar, no signup wall.
+Opens in your browser, typeset properly. Syntax-highlighted code, clean tables. No dark-mode-bro aesthetic, no Notion-clone sidebar, no signup wall.
 
 ## Install
 
@@ -63,22 +63,20 @@ import { render, buildHtml } from '@get-ai-native/pretty-md';
 const html = buildHtml(render('# Hello\n\nWorld'), { title: 'My Doc' });
 ```
 
-Three functions, no surprises:
-
-- `render(md)` — markdown string → HTML fragment
-- `buildHtml(fragment, { title })` — fragment → full styled document
-- `openInBrowser(path)` — opens a local file, returns `true` on success
+- `render(md)` converts a markdown string to an HTML fragment
+- `buildHtml(fragment, { title })` wraps it in a full styled document
+- `openInBrowser(path)` opens a local file, returns `true` on success
 
 ## What makes it pretty
 
-- **Typography over decoration.** System serif for body, mono for code, generous line-height. The stuff you'd set up yourself if you had an afternoon.
-- **GitHub-flavored Markdown.** Tables, task lists, strikethrough, fenced code — via [markdown-it](https://github.com/markdown-it/markdown-it).
+- **Typography.** System fonts, generous line-height, readable font size. The stuff you'd set up yourself if you had an afternoon.
+- **GitHub-flavored Markdown.** Tables, task lists, strikethrough, fenced code, via [markdown-it](https://github.com/markdown-it/markdown-it).
 - **Zero config.** No themes to pick, no CSS to import. Opinionated on purpose.
 - **Fast.** Single file, no server, no Electron.
 
 ## Who built this
 
-Built by [Get AI Native](https://getainative.com) — we help engineering teams adopt AI-native workflows. `pretty-md` came out of wanting our own LLM output to be readable without piping it through four tools.
+Built by [Get AI Native](https://getainative.com). We help engineering teams adopt AI-native workflows. `pretty-md` came out of wanting our own LLM output to be readable without piping it through four tools.
 
 ## Contributing
 
