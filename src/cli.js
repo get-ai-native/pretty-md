@@ -20,6 +20,7 @@ const { version, name } = require('../package.json');
 const USAGE = `\
 Usage: pretty-md [options] [file.md]
        cat file.md | pretty-md
+       pretty-md
 
 Options:
   -o, --output <file>  Write HTML to <file> instead of a temp file
@@ -31,6 +32,7 @@ Examples:
   pretty-md README.md
   pretty-md -o docs/index.html README.md
   cat NOTES.md | pretty-md
+  pretty-md               # render clipboard contents
 `;
 
 /** @param {string[]} argv @returns {{ file: string|null, output: string|null, open: boolean }} */
@@ -79,22 +81,82 @@ async function readStdin() {
   );
 }
 
+async function defaultClipboardRead() {
+  const { default: clipboard } = await import('clipboardy');
+  return clipboard.read();
+}
+
+export class ClipboardError extends Error {
+  constructor() {
+    super('Could not read clipboard. Pass a file or pipe input via stdin.');
+    this.name = 'ClipboardError';
+  }
+}
+
+/**
+ * Resolves markdown input from file, stdin, or clipboard (in that priority order).
+ * Returns the markdown string, or null if clipboard was empty (show help).
+ * Throws if the file is not found or clipboard read fails.
+ *
+ * @param {string|null} file
+ * @param {{
+ *   fileExists?: (f: string) => boolean,
+ *   fileRead?: (f: string) => string,
+ *   stdinIsTTY?: boolean,
+ *   stdinRead?: () => Promise<string>,
+ *   clipboardRead?: () => Promise<string>,
+ * }} deps
+ * @returns {Promise<string|null>}
+ */
+export async function getInput(file, {
+  fileExists = (f) => fs.existsSync(f),
+  fileRead = (f) => fs.readFileSync(f, 'utf8'),
+  stdinIsTTY = process.stdin.isTTY,
+  stdinRead = readStdin,
+  clipboardRead = defaultClipboardRead,
+} = {}) {
+  if (file !== null) {
+    if (!fileExists(file)) {
+      const err = new Error(`file not found: ${file}`);
+      err.exitCode = 1;
+      throw err;
+    }
+    return fileRead(file);
+  }
+
+  if (!stdinIsTTY) {
+    return stdinRead();
+  }
+
+  try {
+    const text = await clipboardRead();
+    if (!text || !text.trim()) return null;
+    return text;
+  } catch {
+    throw new ClipboardError();
+  }
+}
+
 async function main() {
   const { file, output, open } = parseArgs(process.argv);
 
   let markdown;
 
-  if (file) {
-    if (!fs.existsSync(file)) {
-      process.stderr.write(`pretty-md: file not found: ${file}\n`);
-      process.exit(1);
+  try {
+    markdown = await getInput(file, { stdinIsTTY: process.stdin.isTTY });
+  } catch (err) {
+    if (err instanceof ClipboardError) {
+      process.stderr.write(`pretty-md: ${err.message}\n`);
+      process.stdout.write(USAGE);
+      process.exit(0);
     }
-    markdown = fs.readFileSync(file, 'utf8');
-  } else if (!process.stdin.isTTY) {
-    markdown = await readStdin();
-  } else {
-    process.stderr.write(USAGE);
-    process.exit(1);
+    process.stderr.write(`pretty-md: ${err.message}\n`);
+    process.exit(err.exitCode ?? 1);
+  }
+
+  if (markdown === null) {
+    process.stdout.write(USAGE);
+    process.exit(0);
   }
 
   const title = file ? path.basename(file, '.md') : 'pretty-md';

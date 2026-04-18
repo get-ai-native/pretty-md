@@ -46,14 +46,28 @@ npx @get-ai-native/pretty-md any-file.md
 ## Use
 
 ```bash
-pretty-md README.md                    # open a file
-cat NOTES.md | pretty-md               # pipe anything
-pretty-md -o out.html README.md        # save HTML
-pretty-md --no-open README.md          # generate without opening
-claude-code --output-format=md | pretty-md   # works great with LLM output
+pretty-md file.md                                  # render a file
+curl -s https://example.com/README.md | pretty-md  # render piped input
+pbpaste | pretty-md                                # pipe clipboard (macOS)
+pretty-md                                          # render clipboard contents (all platforms)
+```
+
+```bash
+pretty-md README.md -o out.html   # save HTML instead of opening browser
+pretty-md --no-open README.md     # generate without opening
 ```
 
 Full options: `pretty-md --help`
+
+## Rendering LLM output
+
+The fastest way to save a ChatGPT or Claude answer as a readable page:
+
+1. Copy the response from the chat interface.
+2. Run `pretty-md` in your terminal — no arguments needed.
+3. Your browser opens with a fully typeset version of the answer.
+
+`pretty-md` reads your clipboard automatically when no file or pipe is provided. Works on macOS, Linux (X11 and Wayland), and Windows.
 
 ## Use it as a library
 
