@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const styles = readFileSync(
-  fileURLToPath(new URL('./plex-hljs.css', import.meta.url)),
+  fileURLToPath(new URL('./paper-theme.css', import.meta.url)),
   'utf8',
 );
 
