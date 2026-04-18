@@ -6,16 +6,14 @@
 
 One command. No config.
 
-<br>
-
-![pretty-md preview](docs/screenshot-jokes.png)
-
-<br>
-
 [![npm](https://img.shields.io/npm/v/@get-ai-native/pretty-md.svg?style=flat-square)](https://www.npmjs.com/package/@get-ai-native/pretty-md)
 [![CI](https://img.shields.io/github/actions/workflow/status/get-ai-native/pretty-md/ci.yml?style=flat-square)](https://github.com/get-ai-native/pretty-md/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=flat-square)](https://nodejs.org)
+
+<br>
+
+![pretty-md preview](docs/screenshot-jokes.png)
 
 </div>
 
