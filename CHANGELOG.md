@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-04-18
+
+### Fixed
+- Clipboard is now used when stdin is an empty pipe (e.g. running inside Claude Code's terminal), instead of silently rendering nothing.
+
 ## [0.2.0] - 2026-04-18
 
 ### Added

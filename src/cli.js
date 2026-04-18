@@ -125,7 +125,9 @@ export async function getInput(file, {
   }
 
   if (!stdinIsTTY) {
-    return stdinRead();
+    const text = await stdinRead();
+    if (text.trim()) return text;
+    // stdin was empty (e.g. subprocess env) — fall through to clipboard
   }
 
   try {

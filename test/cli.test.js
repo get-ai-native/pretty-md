@@ -84,7 +84,7 @@ describe('getInput()', () => {
     expect(stdinRead).not.toHaveBeenCalled();
   });
 
-  it('piped stdin takes precedence over clipboard', async () => {
+  it('piped stdin takes precedence over clipboard when it has content', async () => {
     const clipboardRead = vi.fn();
     const result = await getInput(null, {
       stdinIsTTY: false,
@@ -93,6 +93,15 @@ describe('getInput()', () => {
     });
     expect(result).toBe('# Stdin content');
     expect(clipboardRead).not.toHaveBeenCalled();
+  });
+
+  it('falls through to clipboard when stdin is empty (e.g. subprocess env)', async () => {
+    const result = await getInput(null, {
+      stdinIsTTY: false,
+      stdinRead: () => Promise.resolve(''),
+      clipboardRead: () => Promise.resolve('# From clipboard'),
+    });
+    expect(result).toBe('# From clipboard');
   });
 
   it('clipboard is used when no file and stdin is a TTY', async () => {
