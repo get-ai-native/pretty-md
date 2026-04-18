@@ -117,9 +117,7 @@ export async function getInput(file, {
 } = {}) {
   if (file !== null) {
     if (!fileExists(file)) {
-      const err = new Error(`file not found: ${file}`);
-      err.exitCode = 1;
-      throw err;
+      throw new Error(`file not found: ${file}`);
     }
     return fileRead(file);
   }
@@ -152,8 +150,9 @@ async function main() {
       process.stdout.write(USAGE);
       process.exit(0);
     }
-    process.stderr.write(`pretty-md: ${err.message}\n`);
-    process.exit(err.exitCode ?? 1);
+    const message = err instanceof Error ? err.message : String(err);
+    process.stderr.write(`pretty-md: ${message}\n`);
+    process.exit(1);
   }
 
   if (markdown === null) {
